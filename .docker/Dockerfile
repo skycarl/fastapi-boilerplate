@@ -1,22 +1,29 @@
-FROM python:3.10-slim-bullseye
-LABEL Boiler Plate
+FROM python:3.13-slim-bullseye
 
-RUN apt-get update \
-    && apt-get -y install libpq-dev gcc curl procps net-tools tini \
-    && apt-get -y clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && pip install gunicorn
-    
-ENV POETRY_HOME=/tmp/poetry
-RUN curl -sSL https://install.python-poetry.org/ | python3 -
-ENV PATH=$POETRY_HOME/bin:$PATH
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    gcc \
+    curl \
+    tini \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install uv and expose it to PATH
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh \
+    && mv /root/.local/bin/uv /usr/local/bin/uv
+
+# Create virtual environment and activate it globally
+RUN uv venv /venv
+ENV PATH="/venv/bin:$PATH"
 ENV PYTHONFAULTHANDLER=1
 ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
+
+# Copy project files and install dependencies from lockfile
+COPY pyproject.toml uv.lock /app/
+RUN uv sync --frozen
+
+# Copy the rest of the code
 COPY . /app
 
-RUN poetry config virtualenvs.create false \
-  && poetry install --only main
-  
 EXPOSE 8000

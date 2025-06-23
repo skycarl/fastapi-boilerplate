@@ -1,12 +1,8 @@
-import os
-from dotenv import load_dotenv
 from fastapi import Header, HTTPException
 
-load_dotenv(".env")
-
-X_TOKEN = os.environ["X_TOKEN"]
+from app.core.settings import config
 
 
 async def verify_token(x_token: str = Header()):
-    if x_token != X_TOKEN:
+    if x_token != config.x_token:
         raise HTTPException(status_code=400, detail="X-Token header invalid")

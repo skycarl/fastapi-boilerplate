@@ -1,18 +1,12 @@
-from sqlalchemy import Column, Integer, DateTime, String, Boolean
-from sqlalchemy.dialects.postgresql import JSON
-from sqlalchemy.sql import func
-from app.core.db.session import Base
-
-
-class Sneaker(Base):
-    __tablename__ = "sneaker"
-    id = Column(Integer, primary_key=True)
-    brand_name = Column(String, index=True)
-    name = Column(String, index=True)
-    description = Column(String, index=True)
-    size = Column(Integer, index=True)
-    color = Column(String, index=True)
-    free_delivery = Column(Boolean, index=True)
+class Sneaker:
+    def __init__(self, id, brand_name, name, description, size, color, free_delivery):
+        self.id = id
+        self.brand_name = brand_name
+        self.name = name
+        self.description = description
+        self.size = size
+        self.color = color
+        self.free_delivery = free_delivery
 
     class Config:
         orm_mode = True

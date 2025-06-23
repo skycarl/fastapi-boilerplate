@@ -8,9 +8,9 @@ DESC_EXAMPLE = "The radiance lives on in the Nike Air Force 1 '07, the basketbal
 
 
 class SneakerSchema(BaseModel):
-    brand_name: str = Field(example="Nike")
-    name: str = Field(example="Nike Air Force 1 '07")
-    description: str = Field(example=DESC_EXAMPLE)
-    size: Annotated[int, Field(ge=38, le=53, example=42)]
-    color: str = Field(example="White")
-    free_delivery: Optional[bool] = Field(default=None, example=False)
+    brand_name: str = Field(json_schema_extra={"example": "Nike"})
+    name: str = Field(json_schema_extra={"example": "Nike Air Force 1 '07"})
+    description: str = Field(json_schema_extra={"example": DESC_EXAMPLE})
+    size: Annotated[int, Field(ge=38, le=53, json_schema_extra={"example": 42})]
+    color: str = Field(json_schema_extra={"example": "White"})
+    free_delivery: Optional[bool] = Field(default=None, json_schema_extra={"example": False})
