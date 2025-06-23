@@ -13,4 +13,6 @@ class SneakerSchema(BaseModel):
     description: str = Field(json_schema_extra={"example": DESC_EXAMPLE})
     size: Annotated[int, Field(ge=38, le=53, json_schema_extra={"example": 42})]
     color: str = Field(json_schema_extra={"example": "White"})
-    free_delivery: Optional[bool] = Field(default=None, json_schema_extra={"example": False})
+    free_delivery: Optional[bool] = Field(
+        default=None, json_schema_extra={"example": False}
+    )

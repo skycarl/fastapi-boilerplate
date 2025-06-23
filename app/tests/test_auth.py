@@ -1,6 +1,7 @@
 """
 Test authentication functionality
 """
+
 import pytest
 from fastapi.testclient import TestClient
 from fastapi import HTTPException
@@ -30,7 +31,7 @@ async def test_verify_token_invalid():
     """Test verify_token with invalid token."""
     with pytest.raises(HTTPException) as exc_info:
         await verify_token("invalid_token")
-    
+
     assert exc_info.value.status_code == 400
     assert "X-Token header invalid" in str(exc_info.value.detail)
 

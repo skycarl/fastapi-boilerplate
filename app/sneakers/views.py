@@ -9,7 +9,6 @@ router = APIRouter(dependencies=[Depends(verify_token)])
 
 @router.get("/sneakers", status_code=200)
 async def get_sneakers():
-
     """
     gets all the sneakers listed in the database.
 
@@ -17,12 +16,21 @@ async def get_sneakers():
         list: An array of sneakers' objects.
     """
 
-    return [{"id": 1, "brand_name": "Nike", "name": "Air Max", "description": "Comfortable running shoes", "size": 10, "color": "Black", "free_delivery": True}]
+    return [
+        {
+            "id": 1,
+            "brand_name": "Nike",
+            "name": "Air Max",
+            "description": "Comfortable running shoes",
+            "size": 10,
+            "color": "Black",
+            "free_delivery": True,
+        }
+    ]
 
 
 @router.post("/sneakers", status_code=201)
 async def add_sneaker(payload: SneakerSchema):
-
     """
     Add sneaker in the database.
 
@@ -35,10 +43,7 @@ async def add_sneaker(payload: SneakerSchema):
 
 
 @router.put("/sneakers/{sneaker_id}", status_code=201)
-async def update_sneaker(
-    sneaker_id: int, payload: SneakerSchema
-):
-
+async def update_sneaker(sneaker_id: int, payload: SneakerSchema):
     """
     Updates the sneaker object in db
 

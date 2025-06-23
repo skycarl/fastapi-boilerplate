@@ -10,10 +10,10 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Config(BaseSettings):
     """Application config."""
-    
+
     # Authentication
     x_token: str = Field(default="12345678910", description="API authentication token")
-    
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
