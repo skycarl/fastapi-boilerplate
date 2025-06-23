@@ -53,3 +53,18 @@ uv run uvicorn app.main:app --reload
 
 - Swagger docs on `localhost:8000/docs`
 - Interactive API documentation with simple authentication
+
+# 🧹 Running Pre-commit Hooks Manually
+
+To manually run pre-commit hooks:
+
+1. Install the hooks defined in `.pre-commit-config.yaml`:
+   ```sh
+   pre-commit install
+   ```
+2. Run all pre-commit hooks on all files:
+   ```sh
+   pre-commit run --all-files
+   ```
+
+You can also run specific hooks or run them only on staged files. See the [pre-commit documentation](https://pre-commit.com/) for more options.
